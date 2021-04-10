@@ -57,7 +57,7 @@ module.exports = {
                   "error",
                   {
                       "type": "element",
-                      "prefix": "app",
+                      "prefix": "sbapp",
                       "style": "kebab-case"
                   }
               ],
@@ -67,7 +67,7 @@ module.exports = {
                   "error",
                   {
                       "type": "attribute",
-                      "prefix": "app",
+                      "prefix": "sbapp",
                       "style": "camelCase"
                   }
               ],
@@ -92,7 +92,7 @@ module.exports = {
             "error",
             {
                 "type": "element",
-                "prefix": "app",
+                "prefix": "sbapp",
                 "style": "kebab-case"
             }
         ],
@@ -102,7 +102,7 @@ module.exports = {
             "error",
             {
                 "type": "attribute",
-                "prefix": "app",
+                "prefix": "sbapp",
                 "style": "camelCase"
             }
         ],
