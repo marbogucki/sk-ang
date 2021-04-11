@@ -29,16 +29,9 @@ export class HttpService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    const message =
-      error.error instanceof ErrorEvent
-        ? `An error occurred:, ${error.error.message}`
-        : `Backend returned code ${error.status}`;
-
-    console.error(message);
-
     if (error.error) {
       console.error('Body:', error.error);
     }
-    return throwError('Something bad happened; please try again later.');
+    return throwError(error.message);
   }
 }

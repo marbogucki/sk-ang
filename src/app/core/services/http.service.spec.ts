@@ -7,10 +7,6 @@ describe('HttpService', () => {
   let httpTestingController: HttpTestingController;
 
   let urlApi: string;
-  let data: {
-    name: string;
-    age: number;
-  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -21,7 +17,6 @@ describe('HttpService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
 
     urlApi = 'http://test-api-url/';
-    data = null;
   });
 
   afterEach(() => {
@@ -29,34 +24,43 @@ describe('HttpService', () => {
   });
 
   it('should return correct url', () => {
+    // Arrange
+    const data = null;
+
+    // Act
     httpClient.get(urlApi).subscribe();
     const req = httpTestingController.expectOne(urlApi);
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    // Assert
     expect(req.request.url).toEqual(urlApi);
     req.flush(data);
   });
 
   describe('get', () => {
     it('should return request method equals "GET"', () => {
+      // Arrange
       const GET_METHOD = 'GET';
+      const data = null;
 
+      // Act
       httpClient.get(urlApi).subscribe();
       const req = httpTestingController.expectOne(urlApi);
 
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      // Assert
       expect(req.request.method).toEqual(GET_METHOD);
       req.flush(data);
     });
 
     it('should fetch correct data', () => {
-      data = {
+      // Arrange
+      const data = {
         name: 'Marek',
         age: 26,
       };
 
+      // Act
       httpClient.get(urlApi).subscribe((result) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        // Assert
         expect(result).toEqual(data);
       });
       const req = httpTestingController.expectOne(urlApi);
@@ -64,13 +68,15 @@ describe('HttpService', () => {
     });
 
     it('should return error message for Client Error', () => {
+      // Arrange
       const errorMessage = '404 - something went wrong';
       const errorCode = 404;
 
+      // Act
       httpClient.get(urlApi).subscribe(
         () => fail('fail data'),
         (error: HttpErrorResponse) => {
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          // Assert
           expect(error.error).toEqual(errorMessage, 'message');
         }
       );
@@ -80,12 +86,14 @@ describe('HttpService', () => {
     });
 
     it('should return 404 code for Client Error', () => {
+      // Arrange
       const errorCode = 404;
 
+      // Act
       httpClient.get(urlApi).subscribe(
         () => fail('should have failed with the 404 error'),
         (error: HttpErrorResponse) => {
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          // Assert
           expect(error.status).toEqual(errorCode, 'statusCode');
         }
       );
@@ -95,13 +103,15 @@ describe('HttpService', () => {
     });
 
     it('should return network error', () => {
+      // Arrange
       const errorMessage = 'Network error';
 
+      // Act
       httpClient.get(urlApi).subscribe(
         () => fail('should have failed with the network error'),
         (error: HttpErrorResponse) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-floating-promises
-          expect(error.error.message).toEqual(errorMessage);
+          // Assert
+          expect((error.error as HttpErrorResponse).message).toEqual(errorMessage);
         }
       );
 
@@ -115,21 +125,26 @@ describe('HttpService', () => {
 
   describe('delete', () => {
     it('should return request method equals "DELETE"', () => {
+      // Arrange
       const DELETE_METHOD = 'DELETE';
+      const data = null;
 
+      // Act
       httpClient.delete(urlApi).subscribe();
       const req = httpTestingController.expectOne(urlApi);
 
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      // Assert
       expect(req.request.method).toEqual(DELETE_METHOD);
       req.flush(data);
     });
 
     it('should remove correct data', () => {
+      // Arrange
       const itemId = 5;
 
+      // Act
       httpClient.delete(urlApi).subscribe((result) => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        // Assert
         expect(result).toBe(itemId);
       });
       const req = httpTestingController.expectOne(urlApi);
@@ -138,13 +153,15 @@ describe('HttpService', () => {
     });
 
     it('should return error message for Client Error', () => {
+      // Arrange
       const errorMessage = '404 - something went wrong';
       const errorCode = 404;
 
+      // Act
       httpClient.delete(urlApi).subscribe(
         () => fail('fail data'),
         (error: HttpErrorResponse) => {
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          // Assert
           expect(error.error).toEqual(errorMessage, 'message');
         }
       );
@@ -154,13 +171,15 @@ describe('HttpService', () => {
     });
 
     it('should return network error', () => {
+      // Arrange
       const errorMessage = 'Network error';
 
+      // Act
       httpClient.delete(urlApi).subscribe(
         () => fail('should have failed with the network error'),
         (error: HttpErrorResponse) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-floating-promises
-          expect(error.error.message).toEqual(errorMessage);
+          // Assert
+          expect((error.error as HttpErrorResponse).message).toEqual(errorMessage);
         }
       );
 

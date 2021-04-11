@@ -22,7 +22,7 @@ export class DataService implements Data {
   }
 
   getAllBooks(): Observable<Book[]> {
-    return this.httpService.get<Book[]>(`${environment.apiUrl}/todos`);
+    return this.httpService.get<Book[]>(`${environment.apiUrl}/tods`);
   }
 
   getBookById(bookId: number): Observable<Book> {
