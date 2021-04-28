@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { allReaders } from 'src/app/data/readers';
 import { Book } from 'src/app/models/book';
 import { Reader } from 'src/app/models/reader';
-import { Data } from '../interfaces/data.interface';
+import { BookService } from '../models/book.service';
 import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
-export class DataService implements Data {
+export class DataService implements BookService {
   private mostPopularBook: Book = null;
 
   constructor(private httpService: HttpService) {}
@@ -22,7 +22,7 @@ export class DataService implements Data {
   }
 
   getAllBooks(): Observable<Book[]> {
-    return this.httpService.get<Book[]>(`${environment.apiUrl}/tods`);
+    return this.httpService.get<Book[]>(`${environment.apiUrl}/todos`);
   }
 
   getBookById(bookId: number): Observable<Book> {

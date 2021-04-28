@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Data } from 'src/app/core/interfaces/data.interface';
-import { DataService } from 'src/app/core/services/data.service';
+import { Component, OnInit } from '@angular/core';
+import { BookService } from 'src/app/core/models/book.service';
 import { Book } from 'src/app/models/book';
 import { Reader } from 'src/app/models/reader';
 
@@ -8,19 +7,13 @@ import { Reader } from 'src/app/models/reader';
   selector: 'sbapp-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [
-    {
-      provide: DataService,
-      useClass: DataService,
-    },
-  ],
 })
 export class DashboardComponent implements OnInit {
   allReaders: Reader[] = null;
   books: Book[] = null;
   popularBook: Book = null;
 
-  constructor(@Inject(DataService) private dataService: Data) {}
+  constructor(private dataService: BookService) {}
 
   ngOnInit(): void {
     this.allReaders = this.dataService.getAllReaders();

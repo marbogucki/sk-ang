@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Book } from 'src/app/models/book';
 import { Reader } from 'src/app/models/reader';
-import { Data } from '../interfaces/data.interface';
+import { BookService } from '../models/book.service';
 
 @Injectable()
-export class InfoService implements Data {
+export class InfoService implements BookService {
   book: Book = {
-    bookId: 7,
+    id: 7,
     title: 'popular book',
     author: 'unknown',
     publicationYear: 2020,
@@ -27,7 +27,7 @@ export class InfoService implements Data {
   getAllBooks(): Observable<Book[]> {
     return of([
       {
-        bookId: 1,
+        id: 1,
         title: 'Lorem ipsum',
         author: 'name',
         publicationYear: 1900,

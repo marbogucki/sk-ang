@@ -1,0 +1,39 @@
+<sbapp-child
+  [data]="list"
+  [myListRef]="myTest"
+></sbapp-child>
+
+<a routerLink="/products" [sbappTarget]="'_self'">test</a> |
+<a href="/products" [sbappTarget]="'_test'">test 2</a> |
+<a href="/products" sbappTarget>test 3</a>
+
+
+<ng-template #myTest let-data>
+  <h5>{{ data.name }}</h5>
+  <p>{{ data.age }}</p>
+  <hr />
+</ng-template>
+
+<br /><br />
+
+
+<sbapp-child
+  [data]="list"
+  [myListRef]="myTest2"
+></sbapp-child>
+
+<ng-template #myTest2 let-data>
+  {{ data.name }} - {{ data.age }} |
+</ng-template>
+
+
+
+<sbapp-child
+  [data]="data"
+  [myListRef]="myTest3"
+></sbapp-child>
+
+<ng-template #myTest3 let-data>
+  <h3>{{ data.title }}</h3>
+  <p>{{ data.body }}</p>
+</ng-template>

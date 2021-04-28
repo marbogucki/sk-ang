@@ -1,0 +1,30 @@
+<!-- <sbapp-parent></sbapp-parent> -->
+
+<br /><br />
+
+<form (ngSubmit)="saveData()" [formGroup]="userForm" style="margin: 40px;">
+  <div>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First Name" formControlName="firstName" />
+        <mat-error *ngIf="firstName.errors?.required">Field is required</mat-error>
+        <mat-error *ngIf="firstName.errors?.minlength">Min length 2</mat-error>
+        <mat-error *ngIf="firstName.errors?.maxlength">Max length 4</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input matInput placeholder="age" formControlName="age" />
+      <mat-error>
+        <span>test</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <br />
+  <br />
+
+  <button mat-raised-button color="primary" [disabled]="userForm.invalid">Save</button>
+</form>

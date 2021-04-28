@@ -1,0 +1,28 @@
+<h4>Product lists</h4>
+
+<div *ngIf="currentProduct$ | async as product" style="border: 1px solid red;">
+  <h2>Current product</h2>
+  <h4>{{ product.name }}</h4>
+  <p>{{ product.id }}</p>
+</div>
+
+<br />
+<br />
+<br />
+
+<button (click)="clearCurrentProduct()">Clear current Product</button>
+
+<div *ngFor="let product of products">
+  <h4>{{ product.name }}</h4>
+  <button (click)="setCurrentProduct(product)">Set product</button>
+  <hr />
+</div>
+
+
+<label>
+  Display product code
+  <input type="checkbox" (change)="toggleProductCode()" />
+</label>
+<div *ngIf="isCodeDisplayed$ | async">
+  This is my code: 1202130303
+</div>
